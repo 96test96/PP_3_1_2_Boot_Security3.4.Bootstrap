@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.configs.entity;
+package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,17 +11,22 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "username",unique = true)
     private String username;
 
     @Column(name = "last_name")
     private String lastName;
-    @Column
+
+    @Column(name = "age")
     private int age;
 
     @Column(name = "email")
@@ -29,17 +34,16 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER )
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private List<Role> roles;
+    private List <Role> roles;
 
     public User() {
     }
 
-    public User(int id, String name, String lastName, String email, int age, String password,List<Role> roles) {
-        this.id = id;
+    public User(String name, String lastName, String email, int age, String password, List<Role> roles) {
         this.username = name;
         this.lastName = lastName;
         this.email = email;
@@ -78,6 +82,14 @@ public class User implements UserDetails {
 
     public int getAge() {
         return age;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public void setAge(int age) {

@@ -1,11 +1,10 @@
-package ru.kata.spring.boot_security.demo.configs.dao;
+package ru.kata.spring.boot_security.demo.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
-import ru.kata.spring.boot_security.demo.configs.entity.Role;
+import ru.kata.spring.boot_security.demo.model.Role;
 
 @EnableJpaRepositories
-public interface RoleRepository extends JpaRepository<Role,Integer> {
-
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 }

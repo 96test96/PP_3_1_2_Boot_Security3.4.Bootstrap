@@ -16,29 +16,38 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Password</th>
                     <th scope="col">LastName</th>
                     <th scope="col">Age</th>
                     <th scope="col">Email</th>
-                    <th scope="col"> Action</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-              <tr th:each="user : ${allUsers}">
-                    <td th:utext="${user.getId()}">Id</td>
-                    <td th:utext="${user.getUsername()}">Name</td>
-                    <td th:utext="${user.getLastName()}">LastName</td>
-                    <td th:utext="${user.getAge()}">Age</td>
-                    <td th:utext="${user.getEmail()}">Email</td>
+              <tr th:each="u : ${users}">
+                    <td th:utext="${u.getId()}">Name</td>
+                    <td th:utext="${u.getUsername()}">Name</td>
+                    <td th:utext="${u.getPassword}">Password</td>
+                    <td th:utext="${u.getLastName()}">LastName</td>
+                    <td th:utext="${u.getAge()}">Age</td>
+                    <td th:utext="${u.getEmail()}">Email</td>
                     <td>
-                        <a th:text="Update" th:href="@{updateUser/{id}(id=${user.getId()})}"></a>
-                      <form th:method="post" th:action="@{deleteUser/{id}(id=${user.getId()})}" >
-                          <input type="submit" value="Delete"/>
-                      </form>
+                      <a th:each="role: ${u.getRoles()}" th:text="${role.getRoleName().toString()}" ></a>
                     </td>
+                    <td>
+                        <a th:text="Update" th:href="@{/admin/edit/{id}(id=${u.getId()})}"></a>
+                    <form th:method="post" th:action="@{/admin/delete/{id}(id=${u.getId()})}" >
+                      <input type="submit" value="Delete"/>
+                    </form>
+                  </td>
               </tr>
             </tbody>
         </table>
         <br/>
-        <a th:href="@{/newUser}">Create User</a></td></tr>
+        <a th:href="@{/admin/new}">Create User</a></td></tr>
+        <form action="/logout">
+            <button>Logout</button>
+        </form>
     </body>
 </html>
