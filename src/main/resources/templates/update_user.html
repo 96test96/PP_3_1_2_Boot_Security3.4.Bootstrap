@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1> Update User</h1> <br>
-<form th:method="post" th:action="@{/admin/update}" th:object="${user}" >
+<form th:method="post" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}" >
     <table>
         <tr><td>Name</td><td>
             <input th:type="text" th:field="*{username}" required

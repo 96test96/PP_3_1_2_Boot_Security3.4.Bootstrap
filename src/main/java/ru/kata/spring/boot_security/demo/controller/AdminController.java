@@ -46,9 +46,9 @@ public class AdminController {
         model.addAttribute("allRoles", roleService.getAll());
         return "update_user";
     }
-    @PostMapping("/update")
-    public String update(@ModelAttribute("update") User user) {
-        usersService.updateUser(user);
+    @PostMapping("/update/{id}")
+    public String update(@ModelAttribute("update") User user,@PathVariable("id") int id) {
+        usersService.updateUser(user,id);
         return "redirect:/admin";
     }
     @PostMapping("/delete/{id}")

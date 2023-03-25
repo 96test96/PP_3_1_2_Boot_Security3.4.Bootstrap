@@ -21,12 +21,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private  final PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -55,19 +56,20 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     @Transactional
     @Override
-    public void updateUser(User updatedUser) {
-//        User user1 = getUserById(id);
-//        user1.setName(updatedUser.getUsername());
-//        user1.setEmail(updatedUser.getEmail());
-//        user1.setAge(updatedUser.getAge());
-//        user1.setLastName(updatedUser.getLastName());
-//        user1.setRoles( updatedUser.getRoles());
-//        user1.setPassword(updatedUser.getPassword());
+    public void updateUser(User updatedUser,int id) {
+        User user1 = getUserById(id);
+        user1.setName(updatedUser.getUsername());
+        user1.setEmail(updatedUser.getEmail());
+        user1.setAge(updatedUser.getAge());
+        user1.setLastName(updatedUser.getLastName());
+        user1.setRoles( updatedUser.getRoles());
+        user1.setPassword(updatedUser.getPassword());
         userRepository.save(updatedUser);
     }
 
