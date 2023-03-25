@@ -12,12 +12,10 @@ public interface UserService extends UserDetailsService {
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     public List<User> getAllUsers();
-
     public void addUser(User user);
-    public void updateUser(User user,int id);
-
+    public void updateUser(User user);
     public User getUserById(int id);
-
     public void deleteUser(int id);
+    public User findByUserName(String username);
 
 }

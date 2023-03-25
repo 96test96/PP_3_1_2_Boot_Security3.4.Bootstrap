@@ -11,9 +11,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,16 +49,14 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id;}
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getLastName() {

@@ -35,9 +35,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username);
         if(user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
+        } else {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
+        }
     }
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toList());
@@ -62,14 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateUser(User updatedUser,int id) {
-        User user1 = getUserById(id);
-        user1.setName(updatedUser.getUsername());
-        user1.setEmail(updatedUser.getEmail());
-        user1.setAge(updatedUser.getAge());
-        user1.setLastName(updatedUser.getLastName());
-        user1.setRoles( updatedUser.getRoles());
-        user1.setPassword(updatedUser.getPassword());
+    public void updateUser(User updatedUser) {
         userRepository.save(updatedUser);
     }
 
@@ -77,5 +71,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User findByUserName(String username) {
+        userRepository.findByUsername(username);
+        return null;
     }
 }
