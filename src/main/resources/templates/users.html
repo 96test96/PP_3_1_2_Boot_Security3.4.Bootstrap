@@ -33,7 +33,7 @@
                     <td th:utext="${u.getAge()}">Age</td>
                     <td th:utext="${u.getEmail()}">Email</td>
                     <td>
-                      <a th:each="role: ${u.getRoles()}" th:text="${role.getRoleName().toString()}" ></a>
+                      <a th:each="role: ${u.getToString(u.getRoles())}" th:text="${role}" ></a>
                     </td>
                     <td>
                         <a th:text="Update" th:href="@{/admin/edit/{id}(id=${u.getId()})}"></a>

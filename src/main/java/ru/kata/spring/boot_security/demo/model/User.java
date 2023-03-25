@@ -4,9 +4,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -48,7 +50,11 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-
+    public String getToString (List<Role>roles) {
+        return roles.stream()
+                .map(Role::getRoleName)
+                .collect(Collectors.joining(", "));
+    }
     public int getId() { return id;}
 
     public void setId(int id) {
@@ -99,6 +105,7 @@ public class User implements UserDetails {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
 
     @Override
     public boolean equals(Object o) {
