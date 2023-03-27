@@ -9,7 +9,9 @@ import ru.kata.spring.boot_security.demo.service.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Component
@@ -29,13 +31,13 @@ public class InsertTables implements CommandLineRunner {
         Role role = new Role("ROLE_ADMIN");
         Role role1 = new Role("ROLE_USER");
         roleServiceImp.saveRole(role);
-        List<Role> roles = new ArrayList<>();
+        Set<Role> roles = new HashSet<>();
         roles.add(role);
         User user = new User("Ivan", "Ivanov", "ivanov@mail.ru", 32, "123", roles);
         userServiceImp.addUser(user);
 
         roleServiceImp.saveRole(role1);
-        List<Role> roles2 = new ArrayList<>();
+        Set<Role> roles2 = new HashSet<>();
         roles2.add(role1);
         User user2 = new User("Sergei", "Ivanov", "ivanov@mail.ru", 32, "1234", roles2);
         userServiceImp.addUser(user2);

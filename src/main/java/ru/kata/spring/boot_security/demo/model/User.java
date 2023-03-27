@@ -1,13 +1,8 @@
 package ru.kata.spring.boot_security.demo.model;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -33,16 +28,16 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
-    private List <Role> roles;
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String lastName, String email, int age, String password, List<Role> roles) {
+    public User(String name, String lastName, String email, int age, String password, Set<Role> roles) {
         this.username = name;
         this.lastName = lastName;
         this.email = email;
@@ -85,16 +80,29 @@ public class User implements UserDetails {
         return age;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
@@ -106,19 +114,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) { this.password = password; }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && age == user.age && Objects.equals(username, user.username) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, lastName, age, email, password, roles);
-    }
 
     @Override
     public String toString() {
