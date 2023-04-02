@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >-->
 
-<head>
-    <meta charset="UTF-8">
-    <title>Update User</title>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Update User</title>-->
 
 
-</head>
-<body>
-<h1> Update User</h1> <br>
-<form th:method="post" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}" >
-    <table>
-        <tr><td>Name</td><td>
-            <input th:type="text" th:field="*{username}" required
-                   th:value="${user.getUsername()}" class="data"></td></tr>
-        <tr><td>Password</td><td>
-            <input th:type="text" th:field="*{password}" required
-                   th:value="${user.getPassword()}" class="data"></td></tr>
-        <tr><td>LastName</td><td>
-            <input th:type="text" th:field="*{lastName}" required
-                   th:value="${user.getLastName()}" class="data"></td></tr>
-        <tr><td>Email</td><td>
-            <input th:type="text"  th:field="*{email}" required
-                   th:value="${user.getEmail()}" class="data"></td></tr>
-        <tr><td>Age</td><td>
-            <input th:type="text"  th:field="*{age}" required
-                   th:value="${user.getAge()}" class="data"></td></tr>
-        <tr><td colspan="2" height="20px"></td></tr>
-        <tr style="text-align: right;"><td colspan="2">
-            <br/>
-            <label>Roles:
-                <input type="checkbox" name="roles"
-                       th:each="role : ${allRoles}"
-                       th:text="${role.getRoleName()}"
-                       th:value="${role.id}"
-                       th:field="*{roles}"
-                />
-            </label>
-            <input type="submit" value="Save changes" id="saveButton"/>
-            <form action="/logout">
-                <button>Logout</button>
-            </form>
-    </table><br>
-</form>
+<!--</head>-->
+<!--<body>-->
+<!--<h1> Update User</h1> <br>-->
+<!--<form th:method="post" th:action="@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}" >-->
+<!--    <table>-->
+<!--        <tr><td>Name</td><td>-->
+<!--            <input th:type="text" th:field="*{username}" required-->
+<!--                   th:value="${user.getUsername()}" class="data"></td></tr>-->
+<!--        <tr><td>Password</td><td>-->
+<!--            <input th:type="text" th:field="*{password}" required-->
+<!--                   th:value="${user.getPassword()}" class="data"></td></tr>-->
+<!--        <tr><td>LastName</td><td>-->
+<!--            <input th:type="text" th:field="*{lastName}" required-->
+<!--                   th:value="${user.getLastName()}" class="data"></td></tr>-->
+<!--        <tr><td>Email</td><td>-->
+<!--            <input th:type="text"  th:field="*{email}" required-->
+<!--                   th:value="${user.getEmail()}" class="data"></td></tr>-->
+<!--        <tr><td>Age</td><td>-->
+<!--            <input th:type="text"  th:field="*{age}" required-->
+<!--                   th:value="${user.getAge()}" class="data"></td></tr>-->
+<!--        <tr><td colspan="2" height="20px"></td></tr>-->
+<!--        <tr style="text-align: right;"><td colspan="2">-->
+<!--            <br/>-->
+<!--            <label>Roles:-->
+<!--                <input type="checkbox" name="roles"-->
+<!--                       th:each="role : ${allRoles}"-->
+<!--                       th:text="${role.getRoleName()}"-->
+<!--                       th:value="${role.id}"-->
+<!--                       th:field="*{roles}"-->
+<!--                />-->
+<!--            </label>-->
+<!--            <input type="submit" value="Save changes" id="saveButton"/>-->
+<!--            <form action="/logout">-->
+<!--                <button>Logout</button>-->
+<!--            </form>-->
+<!--    </table><br>-->
+<!--</form>-->
 
-</body>
+<!--</body>-->
 
-</html>
+<!--</html>-->

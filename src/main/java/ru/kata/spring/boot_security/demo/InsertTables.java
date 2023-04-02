@@ -31,12 +31,13 @@ public class InsertTables implements CommandLineRunner {
         Role role = new Role("ROLE_ADMIN");
         Role role1 = new Role("ROLE_USER");
         roleServiceImp.saveRole(role);
+        roleServiceImp.saveRole(role1);
         Set<Role> roles = new HashSet<>();
         roles.add(role);
+        roles.add(role1);
         User user = new User("Ivan", "Ivanov", "ivanov@mail.ru", 32, "123", roles);
         userServiceImp.addUser(user);
 
-        roleServiceImp.saveRole(role1);
         Set<Role> roles2 = new HashSet<>();
         roles2.add(role1);
         User user2 = new User("Sergei", "Ivanov", "ivanov@mail.ru", 32, "1234", roles2);

@@ -2,19 +2,25 @@ package ru.kata.spring.boot_security.demo.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
 
+    public boolean isEmpty() {
+        return username.isEmpty();}
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "username",unique = true)
+    @Column(name = "username")
     private String username;
 
     @Column(name = "last_name")
@@ -37,8 +43,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastName, String email, int age, String password, Set<Role> roles) {
-        this.username = name;
+    public User(String username, String lastName, String email, int age, String password, Set<Role> roles) {
+        this.username = username;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
@@ -47,8 +53,8 @@ public class User implements UserDetails {
     }
     public String getToString (List<Role>roles) {
         return roles.stream()
-                .map(Role::getRoleName)
-                .collect(Collectors.joining(", "));
+                .map(Role::getRolesNameModal)
+                .collect(Collectors.joining(" "));
     }
     public int getId() { return id;}
 

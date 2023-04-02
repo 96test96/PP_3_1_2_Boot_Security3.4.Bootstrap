@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import java.security.Principal;
 
 
 @Controller
@@ -24,30 +27,32 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String showAllUsers(Model model){
+    public String showAllUsers(Model model, Principal principal){
+        model.addAttribute("user",usersService.findByUserName(principal.getName()));
+        model.addAttribute("roles", roleService.getAll());
         model.addAttribute("users", usersService.getAllUsers());
         return "users";
     }
-    @GetMapping("/new")
-    public String newUser(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.getAll());
-        return "new_user";
-    }
+//    @GetMapping("/new")
+//    public String newUser(Model model){
+//        model.addAttribute("user", new User());
+//        model.addAttribute("roles", roleService.getAll());
+//        return "new_user";
+//    }
     @PostMapping("/addUser")
     public String save(@ModelAttribute("user") User user){
         usersService.addUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit/{id}")
-    public String updateUser(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", usersService.getUserById(id));
-        model.addAttribute("allRoles", roleService.getAll());
-        return "update_user";
-    }
+//    @GetMapping("/edit/{id}")
+//    public String updateUser(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("user", usersService.getUserById(id));
+//        model.addAttribute("allRoles", roleService.getAll());
+//        return "update_user";
+//    }
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("update") User user) {
+    public String update(@ModelAttribute("user") User user) {
         usersService.updateUser(user);
         return "redirect:/admin";
     }
