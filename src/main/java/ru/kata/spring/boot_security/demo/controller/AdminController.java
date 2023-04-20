@@ -33,24 +33,13 @@ public class AdminController {
         model.addAttribute("users", usersService.getAllUsers());
         return "users";
     }
-//    @GetMapping("/new")
-//    public String newUser(Model model){
-//        model.addAttribute("user", new User());
-//        model.addAttribute("roles", roleService.getAll());
-//        return "new_user";
-//    }
+
     @PostMapping("/addUser")
     public String save(@ModelAttribute("user") User user){
         usersService.addUser(user);
         return "redirect:/admin";
     }
 
-//    @GetMapping("/edit/{id}")
-//    public String updateUser(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("user", usersService.getUserById(id));
-//        model.addAttribute("allRoles", roleService.getAll());
-//        return "update_user";
-//    }
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute("user") User user) {
         usersService.updateUser(user);

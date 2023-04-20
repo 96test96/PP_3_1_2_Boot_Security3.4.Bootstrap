@@ -38,9 +38,9 @@ public class InsertTables implements CommandLineRunner {
         User user = new User("Ivan", "Ivanov", "ivanov@mail.ru", 32, "123", roles);
         userServiceImp.addUser(user);
 
-        Set<Role> roles2 = new HashSet<>();
-        roles2.add(role1);
-        User user2 = new User("Sergei", "Ivanov", "ivanov@mail.ru", 32, "1234", roles2);
-        userServiceImp.addUser(user2);
+//        Set<Role> roles2 = new HashSet<>();
+//        roles2.add(role1);
+//        User user2 = new User("Sergei", "Ivanov", "ivanov@mail.ru", 32, "1234", roles2);
+//        userServiceImp.addUser(user2);
     }
 }
