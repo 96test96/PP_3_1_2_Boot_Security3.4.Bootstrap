@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,25 +38,19 @@
 </nav>
 
 <section>
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-2 p-0 mt-2">
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li th:each="userRole : ${user.getRoles()}"
-                        th:if="${userRole.authority.contains('ROLE_USER')}" class="nav-item">
-                        <a th:href="@{/admin}" class="nav-link link-dark"
-                           aria-current="page">
-                            Admin
-                        </a>
+    <div class="row">
+        <div class="col-2 px-0">
+            <ul class="nav nav-pills flex-column">
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link">Admin</a>
                     </li>
-                    <li>
-                        <a th:href="@{/user}" class="nav-link active">
-                            User
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                </div>
+                <li class="nav-item">
+                    <a href= "/user" class="nav-link active">User</a>
+                </li>
+            </ul>
+        </div>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-light hmax min-vh-100">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 ">
@@ -96,49 +91,3 @@
 <script src="javasc.js"></script>
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Пользователь</title>-->
-<!--    <style>-->
-<!--        table th, table td {-->
-<!--            padding: 10px;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<p>Информация о пользователе</p>-->
-
-<!--<div>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Name</th>-->
-<!--            <th>LastName</th>-->
-<!--            <th>Age</th>-->
-<!--            <th>Email</th>-->
-<!--            <th>Role</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:object="${user}">-->
-<!--            <th th:text="*{username}"></th>-->
-<!--            <th th:text="*{lastName}"></th>-->
-<!--            <th th:text="*{age}"></th>-->
-<!--            <th th:text="*{email}"></th>-->
-<!--            <th th:text="*{getToString(roles)}"></th>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!--<form action="/logout">-->
-<!--    <button>Logout</button>-->
-<!--</form>-->
-
-<!--</body>-->
-<!--</html>-->

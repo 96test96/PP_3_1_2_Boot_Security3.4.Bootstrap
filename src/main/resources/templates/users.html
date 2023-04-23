@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -40,25 +40,18 @@
 
 
 <section>
-    <div class="container-fluid">
-        <div class="row">
+    <div class="row">
+        <div class="col-2 px-0">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                        <a href="/admin" class="nav-link">Admin</a>
+                    </li>
+                <li class="nav-item">
+                    <a href="/user" class="nav-link active">User</a>
+                </li>
+            </ul>
+        </div>
 
-            <div class="col-2 p-0 mt-2">
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li th:each="role : ${roles}"
-                        th:if="${role.authority.contains('ROLE_ADMIN')}" class="nav-item">
-                        <a th:href="@{/admin}" class="nav-link active"
-                           aria-current="page">
-                            Admin
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/user}" class="nav-link link-dark">
-                            User
-                        </a>
-                    </li>
-                </ul>
-            </div>
 
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 bg-light hmax min-vh-100">
